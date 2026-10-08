@@ -26,6 +26,6 @@ def make_surrounding_squares(num_squares, total_size):
     plt.imshow(square, cmap=plt.cm.gray, vmin=0.0, vmax=1.0)
     plt.show()
 
-make_surrounding_squares(5,200)
-make_surrounding_squares(10,200)
+make_surrounding_squares(5,200) # function call to create left image
+make_surrounding_squares(10,200) # function call to create right image
 # make_surrounding_squares(100,200)
