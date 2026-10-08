@@ -4,8 +4,7 @@ import numpy as np
 import skimage as ski
 
 # Load in the test image 
-a=io.imread("audrey_lnoise.png", 
-	    as_gray=True)
+a=io.imread("audrey_lnoise.png", as_gray=True)
 a=ski.img_as_float64(a)
 a*=1/(a[:].max())
 
@@ -13,7 +12,7 @@ a*=1/(a[:].max())
 (y,x)=a.shape # type: ignore
 b=np.copy(a)
 
-#function to choose how to shape the window of pixels to average
+#function to choose how to shape the window of pixels to average 
 def denoise_by_shape(source, width, height):
     result = np.copy(source)
 
@@ -24,12 +23,10 @@ def denoise_by_shape(source, width, height):
 
     for j in range(1,y-1):
         for i in range(1,x-1):
-
-            # Create array of width and height around pixel
+            # Create array of `width` and `height` around pixel
             window = source[max(j - top, 0):min(j + bottom, y), 
                     max(i - left, 0):min(i + right, x)]
-            # Set output pixel to be median
-            # of the array
+            # Set output pixel to be median of the array
             result[j,i]=np.median(window)
 
     return result
@@ -39,6 +36,7 @@ def save_by_shape(source, width, height):
     io.imsave(f"{width}by{height}audrey_denoise.png", 
               source_to_save)
 
+save_by_shape(denoise_by_shape(a, 1, 2), 1, 2)
 save_by_shape(denoise_by_shape(a, 1, 3), 1, 3)
 save_by_shape(denoise_by_shape(a, 3, 1), 3, 1)
 save_by_shape(denoise_by_shape(a, 1, 5), 1, 5)

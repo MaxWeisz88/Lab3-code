@@ -1,19 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import io
-
-#function to create a square of the color `shade` in an image given the start for the 
-# upper left corner and width of the desired square
-def makesquare(initial_image, row_ul, col_ul, width, shade):
-    copy = initial_image.copy()
-    copy[row_ul : row_ul + width, col_ul : col_ul + width] = shade
-    #make a square in the image that has width and height equal to `width`
-    return copy
+from test_image import makesquare
 
 #function to create equally spaced/sized squares inside of each other of alternating shade 
 # given the desired number of squares and the total width/height of the square plot
 def make_surrounding_squares(num_squares, total_size):
     step = total_size // (2 * num_squares) 
+    #make initial black square the size of total_size x total_size
     square = makesquare(np.zeros((total_size, total_size)), 0, 0, total_size , 0)
     for i in range(1, num_squares):
         x = i * step 
@@ -28,4 +22,4 @@ def make_surrounding_squares(num_squares, total_size):
 
 make_surrounding_squares(5,200)
 make_surrounding_squares(10,200)
-make_surrounding_squares(100,200)
+# make_surrounding_squares(100,200)
